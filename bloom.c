@@ -63,7 +63,7 @@ static int bloom_check_add(struct bloom * bloom,
     x = (a + i*b) % bloom->bits;
     if (test_bit_set_bit(bloom->bf, x, add)) {
       hits++;
-    } else if (!add) {
+    } else if (!add) {                 // 如果add是true，那么即使这次未命中，也要进行后续的test and set；如果add是false，那么如果未命中，不用进行后续
       // Don't care about the presence of all the bits. Just our own.
       return 0;
     }
